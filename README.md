@@ -64,7 +64,7 @@ node app.js
 ]
 ```
 
-我得通常使用
+通常使用
 ```coffee
 T = require("toshihiko")
 # 数据库连接配置
