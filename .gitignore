@@ -33,7 +33,7 @@ node_modules
 
 #WebStrom
 .idea/
-.map
+*.map
 
 #Mac
 .DS_Store

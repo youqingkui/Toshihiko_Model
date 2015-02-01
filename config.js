@@ -6,7 +6,7 @@
     host: 'localhost',
     userName: 'root',
     password: '',
-    databases: 'mykar_task'
+    databases: 'ggbnb'
   };
 
   module.exports = MYSQL;

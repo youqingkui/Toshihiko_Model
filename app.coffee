@@ -8,19 +8,21 @@ db.query "DESC region",
     if err
       return console.log err
 
-    seller = []
+    code = []
+#    console.log row
     for i in row
       tmp = {}
       tmp["name"] = i.Field
       tmp["type"] = checkType(i.Type)
       tmp["defaultValue"] = i.Default
-      if i.Key
+      if i.Key is 'PRI'
         tmp["primaryKey"] = true
+        delete tmp["defaultValue"]
 
-      seller.push tmp
+      code.push tmp
 
 
-    js = (JSON.stringify(seller))
+    js = (JSON.stringify(code))
     # 格式化代码
     content = js2coffee.build(js, {show_src_lineno: false, indent: "  "})
     end = filterType(content)
@@ -40,6 +42,9 @@ checkType = (test) ->
 
   if test.indexOf("decimal") > -1
     return 'T.Type.Float'
+
+  if test.indexOf("text") > -1
+    return 'T.type.Json'
 
   return 'T.Type.String'
 

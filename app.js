@@ -9,23 +9,24 @@
   js2coffee = require('js2coffee');
 
   db.query("DESC region", function(err, row) {
-    var content, end, i, js, seller, tmp, _i, _len;
+    var code, content, end, i, js, tmp, _i, _len;
     if (err) {
       return console.log(err);
     }
-    seller = [];
+    code = [];
     for (_i = 0, _len = row.length; _i < _len; _i++) {
       i = row[_i];
       tmp = {};
       tmp["name"] = i.Field;
       tmp["type"] = checkType(i.Type);
       tmp["defaultValue"] = i.Default;
-      if (i.Key) {
+      if (i.Key === 'PRI') {
         tmp["primaryKey"] = true;
+        delete tmp["defaultValue"];
       }
-      seller.push(tmp);
+      code.push(tmp);
     }
-    js = JSON.stringify(seller);
+    js = JSON.stringify(code);
     content = js2coffee.build(js, {
       show_src_lineno: false,
       indent: "  "
@@ -43,6 +44,9 @@
     }
     if (test.indexOf("decimal") > -1) {
       return 'T.Type.Float';
+    }
+    if (test.indexOf("text") > -1) {
+      return 'T.type.Json';
     }
     return 'T.Type.String';
   };
