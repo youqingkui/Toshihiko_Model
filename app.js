@@ -8,7 +8,7 @@
 
   js2coffee = require('js2coffee');
 
-  db.query("DESC region", function(err, row) {
+  db.query("DESC note", function(err, row) {
     var code, content, end, i, js, tmp, _i, _len;
     if (err) {
       return console.log(err);
@@ -46,7 +46,7 @@
       return 'T.Type.Float';
     }
     if (test.indexOf("text") > -1) {
-      return 'T.type.Json';
+      return 'T.Type.Json';
     }
     return 'T.Type.String';
   };

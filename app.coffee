@@ -3,7 +3,7 @@ T = require("toshihiko")
 js2coffee = require('js2coffee');
 
 
-db.query "DESC region",
+db.query "DESC note",
   (err, row) ->
     if err
       return console.log err
@@ -44,7 +44,7 @@ checkType = (test) ->
     return 'T.Type.Float'
 
   if test.indexOf("text") > -1
-    return 'T.type.Json'
+    return 'T.Type.Json'
 
   return 'T.Type.String'
 

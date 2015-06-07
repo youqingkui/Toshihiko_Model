@@ -4,7 +4,7 @@ MYSQL =
   host:'localhost',
   userName:'root',
   password:''
-  databases:'mykar_task'
+  databases:'yinxiang_blog'
 
 
 module.exports = MYSQL
