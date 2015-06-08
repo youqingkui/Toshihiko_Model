@@ -18,13 +18,20 @@ class Model
       for i in row
         tmp = {}
         tmp["name"] = i.Field
-        tmp["type"] = checkType(i.Type)
+        tmp["type"] = self.checkType(i.Type)
         tmp["defaultValue"] = i.Default
         if i.Key is 'PRI'
           tmp["primaryKey"] = true
           delete tmp["defaultValue"]
 
         code.push(tmp)
+
+      js = (JSON.stringify(code))
+      # 格式化代码
+      content = js2coffee.build(js, {show_src_lineno: false, indent: "  "})
+      end = self.filterType(content)
+      console.log(end)
+      db.end()
 
 
   # 得到字段类型
@@ -49,13 +56,15 @@ class Model
     one = test.replace(/"T.Type.Integer"/g,"T.Type.Integer")
     tow = one.replace(/"T.Type.String"/g,"T.Type.String")
     three = tow.replace(/"T.Type.Float"/g, "T.Type.Float")
+    four = three.replace(/"T.Type.Json"/g, "T.Type.Json")
 
-    return three
-
-
-
+    return four
 
 
+
+
+m = new Model('note')
+m.descSql()
 
 #db.query "DESC note",
 #  (err, row) ->
