@@ -1,24 +1,26 @@
-# Toshihiko_Model
+# Toshihiko-Model
 [Toshihiko](https://github.com/XadillaX/Toshihiko) 简单数据库模型生成器
 
-### 第一步 修改config.js 配置数据库
+### 安装
+
+`npm install toshihiko-model -g`
+
+### 使用参数
+`-h 数据库主机地址，默认localhost`
+`-u 数据库用户名，默认root`
+`-p 数据库密码，默认为空`
+`-d 要使用的数据库名， 必填参数`
+`-t 要生成模型的数据库表，必填`
+### 使用 
+
+使用默认数据库选择
+`toshihiko-model -d dbName -t tableName`
+
+使用指定数据库配置
+`toshihiko-model -h hostName -u username -p pwd -d dbName -t tableName`
+
 
 ```coffee
-MYSQL =
-  host:'localhost',
-  userName:'root',
-  password:''
-  databases:'test'
-```
-### 第二步 修改app.js
-```coffee
-# you_table 替换成需要的表名
-db.query "DESC you_table"
-```
-
-### 第三步 node app.js
-```coffee
-node app.js
 
 # 输出
 [
